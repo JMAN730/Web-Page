@@ -69,49 +69,31 @@ export default function OGImage() {
           }}
         />
 
-        {/* Badge */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            borderRadius: '999px',
-            padding: '8px 20px',
-            marginBottom: '32px',
-          }}
-        >
-          <div
-            style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: '#22c55e',
-            }}
-          />
-          <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '18px', letterSpacing: '0.05em' }}>
-            Digital Design & Development
-          </span>
-        </div>
+        {/* SB Logo mark */}
+        <img
+          src="https://softbaselabs.com/icon.svg"
+          width={88}
+          height={88}
+          style={{ marginBottom: '24px', borderRadius: '18px' }}
+        />
 
         {/* Brand name */}
         <div
           style={{
+            display: 'flex',
             fontSize: '80px',
             fontWeight: 800,
             color: '#ffffff',
             letterSpacing: '-0.03em',
             lineHeight: 1,
-            marginBottom: '20px',
-            textAlign: 'center',
+            marginBottom: '16px',
           }}
         >
-          SoftBase
+          <span>SoftBase</span>
           <span
             style={{
               background: 'linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #f472b6 100%)',
-              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
               color: 'transparent',
             }}
           >
@@ -125,8 +107,8 @@ export default function OGImage() {
             fontSize: '28px',
             color: 'rgba(255,255,255,0.5)',
             letterSpacing: '0.01em',
-            marginBottom: '56px',
-            textAlign: 'center',
+            marginBottom: '52px',
+            display: 'flex',
           }}
         >
           Beautiful Converting Websites
@@ -160,11 +142,12 @@ export default function OGImage() {
                   fontWeight: 700,
                   color: '#ffffff',
                   letterSpacing: '-0.02em',
+                  display: 'flex',
                 }}
               >
                 {stat.value}
               </span>
-              <span style={{ fontSize: '16px', color: 'rgba(255,255,255,0.4)' }}>
+              <span style={{ fontSize: '16px', color: 'rgba(255,255,255,0.4)', display: 'flex' }}>
                 {stat.label}
               </span>
             </div>
@@ -180,6 +163,7 @@ export default function OGImage() {
             fontSize: '18px',
             color: 'rgba(255,255,255,0.3)',
             letterSpacing: '0.05em',
+            display: 'flex',
           }}
         >
           softbaselabs.com
