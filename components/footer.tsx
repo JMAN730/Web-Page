@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight, Github, Twitter, Linkedin, Dribbble } from "lucide-react"
+import { ArrowUpRight, Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
   if (href.startsWith("#")) {
@@ -16,34 +16,29 @@ const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) =
 }
 
 const footerLinks = {
-  services: [
-    { label: "Web Design", href: "#" },
-    { label: "Development", href: "#" },
-    { label: "E-Commerce", href: "#" },
-    { label: "Branding", href: "#" },
-    { label: "SEO", href: "#" },
+  explore: [
+    { label: "Services", href: "#services" },
+    { label: "Work", href: "#portfolio" },
+    { label: "Process", href: "#process" },
+    { label: "Pricing", href: "#pricing" },
   ],
   company: [
-    { label: "About", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Press", href: "#" },
+    { label: "Testimonials", href: "#testimonials" },
+    { label: "FAQ", href: "#faq" },
     { label: "Contact", href: "#contact" },
   ],
-  resources: [
-    { label: "Case Studies", href: "#" },
-    { label: "Documentation", href: "#" },
-    { label: "Help Center", href: "#" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+  getInTouch: [
+    { label: "Start a Project", href: "#contact" },
+    { label: "Book a Call", href: "#contact" },
+    { label: "softbaselabs@gmail.com", href: "mailto:softbaselabs@gmail.com" },
   ],
 }
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Dribbble, href: "#", label: "Dribbble" },
+  { icon: Mail, href: "mailto:softbaselabs@gmail.com", label: "Email" },
+  { icon: Linkedin, href: "#contact", label: "LinkedIn" },
+  { icon: Twitter, href: "#contact", label: "Twitter" },
+  { icon: Github, href: "#contact", label: "GitHub" },
 ]
 
 export function Footer() {
@@ -68,6 +63,7 @@ export function Footer() {
                 <motion.a
                   key={social.label}
                   href={social.href}
+                  onClick={(e) => scrollToSection(e, social.href)}
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                   aria-label={social.label}
@@ -78,13 +74,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Services */}
+          {/* Explore */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Services
+              Explore
             </h3>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
+              {footerLinks.explore.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -120,13 +116,13 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Get in Touch */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Resources
+              Get in Touch
             </h3>
             <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
+              {footerLinks.getInTouch.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -148,14 +144,26 @@ export function Footer() {
             © {new Date().getFullYear()} SoftBaseLabs. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Privacy
+            <Link
+              href="#pricing"
+              onClick={(e) => scrollToSection(e, "#pricing")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Pricing
             </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Terms
+            <Link
+              href="#faq"
+              onClick={(e) => scrollToSection(e, "#faq")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              FAQ
             </Link>
-            <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cookies
+            <Link
+              href="#contact"
+              onClick={(e) => scrollToSection(e, "#contact")}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Contact
             </Link>
           </div>
         </div>

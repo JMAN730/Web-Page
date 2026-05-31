@@ -10,7 +10,8 @@ const navItems = [
   { label: "Services", href: "#services" },
   { label: "Work", href: "#portfolio" },
   { label: "Process", href: "#process" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ]
 

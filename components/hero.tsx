@@ -136,7 +136,7 @@ export function Hero() {
           {[
             { value: "20+", label: "Projects Delivered" },
             { value: "98%", label: "Client Satisfaction" },
-            { value: "3+", label: "Years Experience" },
+            { value: "2+", label: "Years Experience" },
             { value: "6+", label: "Industries Served"}
           ].map((stat, index) => (
             <motion.div
