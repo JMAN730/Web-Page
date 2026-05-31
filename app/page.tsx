@@ -5,7 +5,9 @@ import { Hero } from "@/components/hero"
 const Services     = dynamic(() => import("@/components/services").then(m => ({ default: m.Services })))
 const Portfolio    = dynamic(() => import("@/components/portfolio").then(m => ({ default: m.Portfolio })))
 const Process      = dynamic(() => import("@/components/process").then(m => ({ default: m.Process })))
+const Pricing      = dynamic(() => import("@/components/pricing").then(m => ({ default: m.Pricing })))
 const Testimonials = dynamic(() => import("@/components/testimonials").then(m => ({ default: m.Testimonials })))
+const FAQ          = dynamic(() => import("@/components/faq").then(m => ({ default: m.FAQ })))
 const CTA          = dynamic(() => import("@/components/cta").then(m => ({ default: m.CTA })))
 const Footer       = dynamic(() => import("@/components/footer").then(m => ({ default: m.Footer })))
 
@@ -17,7 +19,9 @@ export default function Home() {
       <Services />
       <Portfolio />
       <Process />
+      <Pricing />
       <Testimonials />
+      <FAQ />
       <CTA />
       <Footer />
     </main>
