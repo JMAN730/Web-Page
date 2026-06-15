@@ -6,11 +6,15 @@ import { motion } from "framer-motion"
 import { format } from "date-fns"
 import { ArrowLeft, ArrowRight, CalendarCheck, Clock, Mail } from "lucide-react"
 import { GlassCalendar } from "@/components/ui/glass-calendar"
+import { toast } from 'sonner'
 
 export default function BookPage() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   const [selectedTime, setSelectedTime] = useState<string | undefined>(undefined)
   const [note, setNote] = useState("")
+  const [customerName, setCustomerName] = useState("")
+  const [customerEmail, setCustomerEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const prettyDate = format(selectedDate, "EEEE, MMMM d, yyyy")
   const mailtoHref = `mailto:softbaselabs@gmail.com?subject=${encodeURIComponent(
@@ -20,6 +24,32 @@ export default function BookPage() {
       selectedTime ? ` at ${selectedTime}` : ""
     }.\n\nA bit about my project:\n${note || "\n"}\n`,
   )}`
+
+  async function handleRequest(e: React.MouseEvent) {
+    e.preventDefault()
+    if (!selectedTime || !customerName.trim() || !customerEmail.trim()) {
+      // simple inline guard; a toast would also be fine
+      alert('Please pick a time and enter your name + email.')
+      return
+    }
+    setIsSubmitting(true)
+    const { sendBookingRequestAction } = await import('@/lib/email')
+    const result = await sendBookingRequestAction({
+      date: prettyDate,
+      time: selectedTime,
+      note: note || undefined,
+      customerName: customerName.trim(),
+      customerEmail: customerEmail.trim(),
+    })
+    setIsSubmitting(false)
+
+    if (result.success) {
+      toast.success('Request sent. Check your email for confirmation.')
+      // optional: clear note or keep for UX
+    } else {
+      toast.error(result.error || 'Could not send request. Please try the contact form or email us.')
+    }
+  }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
@@ -86,15 +116,35 @@ export default function BookPage() {
             </div>
           </div>
 
+          <div className="space-y-3">
+            <input
+              type="text"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              placeholder="Your name"
+              className="w-full rounded-2xl border border-border/60 bg-card/40 p-4 text-sm backdrop-blur-xl placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/30"
+              required
+            />
+            <input
+              type="email"
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              placeholder="Your email (for confirmation)"
+              className="w-full rounded-2xl border border-border/60 bg-card/40 p-4 text-sm backdrop-blur-xl placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-foreground/30"
+              required
+            />
+          </div>
+
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={mailtoHref}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-7 py-4 text-base font-medium text-background transition-colors hover:bg-foreground/90"
+            <button
+              onClick={handleRequest}
+              disabled={isSubmitting}
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-7 py-4 text-base font-medium text-background transition-colors hover:bg-foreground/90 disabled:opacity-60"
             >
               <Mail className="h-5 w-5" />
-              Request this time
+              {isSubmitting ? "Sending request..." : "Request this time"}
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </a>
+            </button>
             <Link
               href="/#contact"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-secondary px-7 py-4 text-base font-medium text-foreground transition-colors hover:bg-muted"

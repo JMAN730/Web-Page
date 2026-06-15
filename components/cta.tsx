@@ -6,6 +6,8 @@ import { ArrowRight, Mail, Check, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from 'sonner'
+import { sendContactInquiryAction as sendContactInquiry } from '@/lib/email'
 
 export function CTA() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -15,13 +17,32 @@ export function CTA() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    const name = (formData.get('name') as string || '').trim()
+    const email = (formData.get('email') as string || '').trim()
+    const company = (formData.get('company') as string || '').trim()
+    const message = (formData.get('message') as string || '').trim()
+
+    if (!name || !email || !message) {
+      toast.error('Please fill out name, email, and project details.')
+      return
+    }
+
     setIsSubmitting(true)
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    const result = await sendContactInquiry({ name, email, company: company || undefined, message })
     setIsSubmitting(false)
-    setIsSubmitted(true)
-    // Reset after 3 seconds
-    setTimeout(() => setIsSubmitted(false), 3000)
+
+    if (result.success) {
+      setIsSubmitted(true)
+      toast.success("Message sent! We'll reply within 24 hours.")
+      form.reset()
+      setTimeout(() => setIsSubmitted(false), 3000)
+    } else {
+      toast.error(result.error || 'Something went wrong. Please try again or email us directly.')
+      // Failure is already logged server-side with full context
+    }
   }
 
   return (
@@ -84,6 +105,7 @@ export function CTA() {
                   </label>
                   <Input
                     id="name"
+                    name="name"
                     placeholder="Your name"
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground"
                   />
@@ -94,6 +116,7 @@ export function CTA() {
                   </label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="you@example.com"
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground"
@@ -107,6 +130,7 @@ export function CTA() {
                 </label>
                 <Input
                   id="company"
+                  name="company"
                   placeholder="Your company name"
                   className="bg-card border-border text-foreground placeholder:text-muted-foreground"
                 />
@@ -118,6 +142,7 @@ export function CTA() {
                 </label>
                 <Textarea
                   id="message"
+                  name="message"
                   rows={4}
                   placeholder="Describe your project, goals, and timeline..."
                   className="bg-card border-border text-foreground placeholder:text-muted-foreground resize-none"

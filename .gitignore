@@ -7,7 +7,11 @@ __v0_jsx-dev-runtime.ts
 .vercel/
 
 # Environment variables
+.env
+.env.local
 .env*.local
+# Note: .env.example is committed intentionally as the template for RESEND_API_KEY / CONTACT_EMAIL / MOCK_EMAIL
+
 
 # Common ignores
 node_modules
