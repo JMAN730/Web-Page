@@ -2,50 +2,62 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef, useState } from "react"
-import { Palette, Code2, Box, BarChart3, Layers, Zap } from "lucide-react"
+import { Globe, Smartphone, Palette, Bot, BarChart3, LifeBuoy } from "lucide-react"
 
 const services = [
   {
+    icon: Globe,
+    pillar: "Web",
+    title: "Web Development",
+    description:
+      "Fast, scalable websites and platforms engineered with modern stacks — built to load instantly and convert visitors into customers.",
+    features: ["Next.js / React", "Headless CMS", "Core Web Vitals"],
+    gradient: "linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(99, 102, 241, 0.06) 100%)",
+  },
+  {
+    icon: Smartphone,
+    pillar: "Apps",
+    title: "App Development",
+    description:
+      "Cross-platform web and mobile apps with native-grade performance, thoughtful UX, and architecture that scales with you.",
+    features: ["React Native", "Web Apps", "APIs & Backends"],
+    gradient: "linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%)",
+  },
+  {
     icon: Palette,
-    title: "Web Design",
+    pillar: "Design",
+    title: "Product Design",
     description:
-      "Stunning, user-centric designs that capture your brand essence and engage visitors from the first click.",
+      "Distinctive brand and interface design that turns your vision into beautiful, intuitive experiences people love to use.",
     features: ["UI/UX Design", "Brand Identity", "Design Systems"],
+    gradient: "linear-gradient(135deg, rgba(236, 72, 153, 0.12) 0%, rgba(168, 85, 247, 0.06) 100%)",
   },
   {
-    icon: Code2,
-    title: "Development",
+    icon: Bot,
+    pillar: "Automation",
+    title: "Automation & AI",
     description:
-      "Clean, scalable code built with modern technologies for lightning-fast performance and reliability.",
-    features: ["React/Next.js", "Custom CMS", "API Integration"],
-  },
-  {
-    icon: Box,
-    title: "3D Models & Animated Scrolling",
-    description:
-      "Immersive, interactive experiences with custom 3D models and scroll-driven animations that captivate visitors and make your brand unforgettable.",
-    features: ["3D Models", "Scroll Animations", "Interactive WebGL"],
+      "Intelligent automations, bots, and AI workflows that remove busywork and let your team move faster than ever.",
+    features: ["AI Integration", "Chatbots", "Workflow Automation"],
+    gradient: "linear-gradient(135deg, rgba(217, 70, 239, 0.12) 0%, rgba(236, 72, 153, 0.06) 100%)",
   },
   {
     icon: BarChart3,
+    pillar: "Growth",
     title: "SEO & Analytics",
     description:
-      "Data-driven strategies to boost visibility and track performance for continuous improvement.",
+      "Data-driven SEO and analytics that boost visibility, track what matters, and compound results over time.",
     features: ["Technical SEO", "Performance Tracking", "A/B Testing"],
+    gradient: "linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(236, 72, 153, 0.06) 100%)",
   },
   {
-    icon: Layers,
-    title: "Branding",
+    icon: LifeBuoy,
+    pillar: "Support",
+    title: "Care & Optimization",
     description:
-      "Comprehensive brand strategies that create lasting impressions and build customer loyalty.",
-    features: ["Logo Design", "Brand Guidelines", "Visual Identity"],
-  },
-  {
-    icon: Zap,
-    title: "Optimization",
-    description:
-      "Performance tuning and conversion optimization to maximize the impact of your digital presence.",
-    features: ["Speed Optimization", "CRO", "User Testing"],
+      "Ongoing maintenance, monitoring, and conversion optimization to keep everything fast, secure, and growing.",
+    features: ["Maintenance", "CRO", "Monitoring"],
+    gradient: "linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(99, 102, 241, 0.06) 100%)",
   },
 ]
 
@@ -63,14 +75,15 @@ export function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <span className="text-sm uppercase tracking-widest text-muted-foreground">
+          <span className="text-sm uppercase tracking-widest bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
             What We Do
           </span>
           <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance">
-            Services built for growth
+            Web · Apps · Design · Automation
           </h2>
           <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground text-balance">
-            End-to-end digital solutions designed to elevate your brand and accelerate your business.
+            One team of developers, designers, and strategists shipping digital products
+            that are beautiful, functional, and built to convert.
           </p>
         </motion.div>
 
@@ -88,20 +101,25 @@ export function Services() {
               <div
                 className={`relative h-full p-8 rounded-2xl border transition-all duration-500 ${
                   hoveredIndex === index
-                    ? "bg-secondary border-border"
+                    ? "bg-secondary border-violet-500/30"
                     : "bg-card border-border/50"
                 }`}
               >
-                <motion.div
-                  animate={{
-                    scale: hoveredIndex === index ? 1.1 : 1,
-                    rotate: hoveredIndex === index ? 5 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-secondary mb-6"
-                >
-                  <service.icon className="h-6 w-6 text-foreground" />
-                </motion.div>
+                <div className="flex items-center justify-between mb-6">
+                  <motion.div
+                    animate={{
+                      scale: hoveredIndex === index ? 1.1 : 1,
+                      rotate: hoveredIndex === index ? 5 : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/20 to-pink-500/20 border border-violet-500/20"
+                  >
+                    <service.icon className="h-6 w-6 text-violet-300" />
+                  </motion.div>
+                  <span className="text-xs uppercase tracking-widest bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
+                    {service.pillar}
+                  </span>
+                </div>
 
                 <h3 className="text-xl font-semibold text-foreground mb-3">
                   {service.title}
@@ -126,10 +144,7 @@ export function Services() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: hoveredIndex === index ? 1 : 0 }}
                   className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)",
-                  }}
+                  style={{ background: service.gradient }}
                 />
               </div>
             </motion.div>

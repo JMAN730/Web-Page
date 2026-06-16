@@ -49,7 +49,7 @@ export function Process() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <span className="text-sm uppercase tracking-widest text-muted-foreground">
+          <span className="text-sm uppercase tracking-widest bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
             How We Work
           </span>
           <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance">

@@ -55,7 +55,7 @@ export function CTA() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-sm uppercase tracking-widest text-muted-foreground">
+            <span className="text-sm uppercase tracking-widest bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
               Start a Project
             </span>
             <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">

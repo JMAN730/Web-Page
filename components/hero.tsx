@@ -82,11 +82,11 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[0.95]"
         >
-          <span className="block text-balance">We craft digital</span>
+          <span className="block text-balance">We build digital</span>
           <span className="block mt-2 text-balance">
-            experiences that{" "}
+            products that{" "}
             <span className="relative">
-              <span className="relative z-10 bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent animate-pulse">
+              <span className="relative z-10 bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
                 convert
               </span>
             </span>
@@ -99,9 +99,26 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-8 max-w-2xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed text-balance"
         >
-          SoftBaseLabs transforms your vision into stunning, high-performing
-          websites that captivate audiences and drive measurable results.
+          SoftBaseLabs is a code agency partnering with ambitious brands to ship
+          websites, apps, and intelligent automations that are beautiful,
+          functional, and built to grow.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-medium"
+        >
+          {["Web", "Apps", "Design", "Automation"].map((pillar, i) => (
+            <span key={pillar} className="flex items-center gap-3">
+              {i > 0 && <span className="h-1 w-1 rounded-full bg-violet-400/60" />}
+              <span className="bg-gradient-to-r from-violet-300 to-pink-300 bg-clip-text text-transparent">
+                {pillar}
+              </span>
+            </span>
+          ))}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
