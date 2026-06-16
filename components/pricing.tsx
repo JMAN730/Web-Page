@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { Rocket, TrendingUp, Gem, Check, Crown, Puzzle, Clock, Zap } from "lucide-react"
+import { Rocket, TrendingUp, Gem, Check, Crown, Puzzle, Clock, Zap, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const scrollToContact = () => {
@@ -11,6 +11,22 @@ const scrollToContact = () => {
     element.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 }
+
+const freeOffer = [
+  { label: "Website Build", value: "$0" },
+  { label: "Hosting & Maintenance", value: "$200/month" },
+  { label: "Minimum Commitment", value: "6 Months" },
+  { label: "Ownership Transfer", value: "Included" },
+]
+
+const freeIncludes = [
+  "Fully Custom Website",
+  "Mobile Optimization",
+  "Contact Forms",
+  "Basic SEO Foundation",
+  "Ongoing Support",
+  "Performance Optimization",
+]
 
 const plans = [
   {
@@ -72,23 +88,84 @@ export function Pricing() {
   return (
     <section id="pricing" ref={containerRef} className="py-32 relative overflow-hidden">
       {/* Ambient glow */}
-      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.06)_0%,transparent_70%)] blur-3xl" />
+      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.12)_0%,transparent_70%)] blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+        {/* ---- Free Website Program (centerpiece) ---- */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <span className="text-sm uppercase tracking-widest bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
-            Pricing
+            Free Custom Website Program
           </span>
           <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance">
-            Web Design Packages
+            Apply For A Free{" "}
+            <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+              Website
+            </span>
           </h2>
           <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground text-balance">
-            Modern Websites. Better Performance. Real Results.
+            No upfront website development cost. You only pay for hosting,
+            maintenance, and support.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mx-auto max-w-2xl rounded-3xl border border-violet-500/30 bg-card/50 backdrop-blur-xl p-8 sm:p-10 shadow-[0_0_60px_-20px_rgba(168,85,247,0.6)]"
+        >
+          <div className="divide-y divide-border/60">
+            {freeOffer.map((row) => (
+              <div key={row.label} className="flex items-center justify-between py-4">
+                <span className="text-muted-foreground">{row.label}</span>
+                <span className="text-lg font-semibold text-foreground">{row.value}</span>
+              </div>
+            ))}
+          </div>
+
+          <ul className="mt-8 grid sm:grid-cols-2 gap-3">
+            {freeIncludes.map((item) => (
+              <li key={item} className="flex items-center gap-3 text-sm text-muted-foreground">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/30 to-pink-500/30 border border-violet-500/30">
+                  <Check className="h-3 w-3 text-violet-300" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <Button
+            onClick={scrollToContact}
+            size="lg"
+            className="mt-10 w-full bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:opacity-90 rounded-full py-6 text-base group shadow-[0_0_40px_-10px_rgba(168,85,247,0.6)]"
+          >
+            Apply For A Free Website
+            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+        </motion.div>
+
+        {/* ---- Traditional packages ---- */}
+        <motion.div
+          id="packages"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-center mt-32 mb-16 scroll-mt-28"
+        >
+          <span className="text-sm uppercase tracking-widest bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
+            Traditional Packages
+          </span>
+          <h2 className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance">
+            Prefer to own it outright?
+          </h2>
+          <p className="mt-6 max-w-2xl mx-auto text-lg text-muted-foreground text-balance">
+            One-time builds with optional support. Modern websites, better
+            performance, real results.
           </p>
         </motion.div>
 
@@ -102,15 +179,15 @@ export function Pricing() {
               whileHover={{ y: -8 }}
               className={`group relative rounded-3xl p-8 backdrop-blur-xl transition-all duration-500 ${
                 plan.popular
-                  ? "bg-secondary/60 border border-foreground/30 lg:-mt-4 lg:mb-4 shadow-[0_0_40px_-12px_rgba(255,255,255,0.25)]"
-                  : "bg-card/50 border border-border/60 hover:border-border"
+                  ? "bg-secondary/60 border border-violet-500/40 lg:-mt-4 lg:mb-4 shadow-[0_0_40px_-12px_rgba(168,85,247,0.5)]"
+                  : "bg-card/50 border border-border/60 hover:border-violet-500/30"
               }`}
             >
               {/* Glassy sheen */}
               <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.08] to-transparent opacity-60" />
 
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-foreground px-4 py-1.5 text-xs font-semibold text-background shadow-lg whitespace-nowrap">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-violet-500 to-pink-500 px-4 py-1.5 text-xs font-semibold text-white shadow-lg whitespace-nowrap">
                   <Crown className="h-3.5 w-3.5" />
                   MOST POPULAR
                 </div>
@@ -120,7 +197,9 @@ export function Pricing() {
                 <div className="flex items-center gap-3 mb-6">
                   <div
                     className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl ${
-                      plan.popular ? "bg-foreground/15 text-foreground" : "bg-secondary text-foreground"
+                      plan.popular
+                        ? "bg-gradient-to-br from-violet-500/25 to-pink-500/25 text-violet-200"
+                        : "bg-secondary text-foreground"
                     }`}
                   >
                     <plan.icon className="h-6 w-6" />
@@ -155,7 +234,9 @@ export function Pricing() {
                     <li key={feature} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <span
                         className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                          plan.popular ? "bg-foreground/15 text-foreground" : "bg-secondary text-foreground"
+                          plan.popular
+                            ? "bg-gradient-to-br from-violet-500/30 to-pink-500/30 text-violet-200"
+                            : "bg-secondary text-foreground"
                         }`}
                       >
                         <Check className="h-3 w-3" />
@@ -169,7 +250,7 @@ export function Pricing() {
                   onClick={scrollToContact}
                   className={`w-full py-6 text-base ${
                     plan.popular
-                      ? "bg-foreground text-background hover:bg-foreground/90"
+                      ? "bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:opacity-90"
                       : "bg-secondary text-foreground border border-border hover:bg-muted"
                   }`}
                 >
