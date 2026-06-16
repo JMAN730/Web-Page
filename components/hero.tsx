@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowRight, ArrowDown } from "lucide-react"
+import { ArrowRight, ArrowDown, Sparkles, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useRef } from "react"
@@ -12,6 +12,15 @@ const scrollToSection = (id: string) => {
     element.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 }
+
+const trustBadges = [
+  "Fully Custom Build",
+  "Mobile Optimized",
+  "Hosting Included",
+  "Contact Forms",
+  "SEO Foundation",
+  "Ownership Transfer",
+]
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -28,7 +37,7 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-20"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0">
@@ -60,19 +69,18 @@ export function Hero() {
         }}
       />
 
-      <motion.div style={{ scale, opacity, willChange: 'transform' }} className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 text-center">
+      <motion.div style={{ scale, opacity, willChange: 'transform' }} className="relative z-10 mx-auto max-w-4xl px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-8"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-secondary/50 text-sm text-muted-foreground">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 text-sm font-medium uppercase tracking-widest">
+            <Sparkles className="h-3.5 w-3.5 text-violet-300" />
+            <span className="bg-gradient-to-r from-violet-300 to-pink-300 bg-clip-text text-transparent">
+              Free Custom Website Program
             </span>
-            Now accepting new projects for Q2 2026
           </span>
         </motion.div>
 
@@ -82,13 +90,10 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[0.95]"
         >
-          <span className="block text-balance">We craft digital</span>
+          <span className="block text-balance">Premium Custom Websites</span>
           <span className="block mt-2 text-balance">
-            experiences that{" "}
-            <span className="relative">
-              <span className="relative z-10 bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent animate-pulse">
-                convert
-              </span>
+            <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+              Built For Free
             </span>
           </span>
         </motion.h1>
@@ -99,8 +104,9 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-8 max-w-2xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed text-balance"
         >
-          SoftBaseLabs transforms your vision into stunning, high-performing
-          websites that captivate audiences and drive measurable results.
+          SoftBaseLabs designs and engineers high-performance websites,
+          applications, CRMs, and AI-powered automations — built for companies
+          ready to operate smarter and grow faster.
         </motion.p>
 
         <motion.div
@@ -111,45 +117,49 @@ export function Hero() {
         >
           <Button
             size="lg"
-            onClick={() => scrollToSection("portfolio")}
-            className="bg-foreground text-background hover:bg-foreground/90 px-8 py-6 text-base group"
+            onClick={() => scrollToSection("pricing")}
+            className="bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:opacity-90 rounded-full px-8 py-6 text-base group shadow-[0_0_40px_-10px_rgba(168,85,247,0.6)]"
           >
-            View Our Work
+            Apply For A Free Website
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => scrollToSection("packages")}
+            className="border-border text-foreground hover:bg-secondary rounded-full px-8 py-6 text-base"
+          >
+            View Traditional Packages
           </Button>
           <Button
             asChild
             size="lg"
             variant="outline"
-            className="border-border text-foreground hover:bg-secondary px-8 py-6 text-base"
+            className="border-border text-foreground hover:bg-secondary rounded-full px-8 py-6 text-base"
           >
-            <Link href="/book">Book a Call</Link>
+            <Link href="/book">Free Custom Quote</Link>
           </Button>
         </motion.div>
 
-        {/* Stats */}
+        {/* Trust badges */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16"
+          className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl mx-auto"
         >
-          {[
-            { value: "20+", label: "Projects Delivered" },
-            { value: "98%", label: "Client Satisfaction" },
-            { value: "2+", label: "Years Experience" },
-            { value: "6+", label: "Industries Served"}
-          ].map((stat, index) => (
+          {trustBadges.map((badge, index) => (
             <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
+              key={badge}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
+              transition={{ duration: 0.4, delay: 1.1 + index * 0.08 }}
+              className="flex items-center gap-2.5 text-sm text-muted-foreground"
             >
-              <div className="text-3xl sm:text-4xl font-bold text-foreground">{stat.value}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/30 to-pink-500/30 border border-violet-500/30">
+                <Check className="h-3 w-3 text-violet-300" />
+              </span>
+              {badge}
             </motion.div>
           ))}
         </motion.div>

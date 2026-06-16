@@ -7,10 +7,11 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 const navItems = [
+  { label: "Free Website", href: "#pricing" },
   { label: "Services", href: "#services" },
   { label: "Work", href: "#portfolio" },
   { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Packages", href: "#packages" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
@@ -26,8 +27,8 @@ const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) =
   }
 }
 
-const scrollToContact = () => {
-  const element = document.getElementById("contact")
+const scrollToApply = () => {
+  const element = document.getElementById("pricing")
   if (element) {
     element.scrollIntoView({ behavior: "smooth", block: "start" })
   }
@@ -95,11 +96,10 @@ export function Header() {
                 transition={{ duration: 0.4, delay: 0.5 }}
               >
                 <Button
-                  variant="outline"
-                  onClick={scrollToContact}
-                  className="border-border text-foreground hover:bg-secondary group"
+                  onClick={scrollToApply}
+                  className="bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:opacity-90 rounded-full group"
                 >
-                  Start a Project
+                  Apply Free
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </motion.div>
@@ -151,14 +151,14 @@ export function Header() {
                 transition={{ delay: navItems.length * 0.1 }}
                 className="mt-8"
               >
-                <Button 
+                <Button
                   onClick={() => {
-                    scrollToContact()
+                    scrollToApply()
                     setIsMobileMenuOpen(false)
                   }}
-                  className="w-full bg-foreground text-background hover:bg-foreground/90"
+                  className="w-full bg-gradient-to-r from-violet-500 to-pink-500 text-white hover:opacity-90 rounded-full"
                 >
-                  Start a Project
+                  Apply Free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </motion.div>
